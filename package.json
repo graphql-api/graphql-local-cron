@@ -1,10 +1,12 @@
 {
-  "name": "@graphql-api/template",
+  "name": "@graphql-api/cron.local",
   "version": "0.0.0",
-  "description": "template",
-  "main": "index.js",
+  "description": "cron",
+  "main": "src/index.js",
+  "type": "module",
   "exports": {
     ".": {
+      "import": "./src/index.ts",
       "federation": []
     },
     "./resolvers": [
@@ -12,7 +14,10 @@
     ],
     "./schema": [
       "./schema.graphql"
-    ]
+    ],
+    "./tsconfig": {
+      "import": "./tsconfig.json"
+    }
   },
   "typesVersions": {
     "*": {
@@ -27,11 +32,11 @@
   "scripts": {
     "build": "tsc",
     "codegen": "graphql-codegen",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "example:build": "pnpm --filter @/example dev"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/graphql-api/graphql-api-template.git"
+    "url": "git+https://github.com/graphql-api/graphql-local-cron.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/graphql-api"
@@ -43,21 +48,35 @@
     "template",
     "typescript"
   ],
-  "author": "Jonathan Allenberg",
+  "author": {
+    "url": "https://codeberg.org/jfa",
+    "name": "jfa"
+  },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/graphql-api/graphql-api-template/issues"
+    "url": "https://github.com/graphql-api/graphql-local-cron/issues"
   },
-  "homepage": "https://github.com/graphql-api/graphql-api-template#readme",
+  "homepage": "https://github.com/graphql-api/graphql-local-cron#readme",
+  "dependencies": {
+    "events": "^3.3.0"
+  },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.6.2",
-    "@graphql-codegen/schema-ast": "^2.4.1",
-    "@graphql-codegen/typescript": "^2.4.5",
-    "@graphql-codegen/typescript-apollo-client-helpers": "^2.1.12",
-    "@graphql-codegen/typescript-resolvers": "^2.5.2",
-    "apollo-server-micro": "^3.6.3",
-    "graphql": "^16.3.0",
-    "micro": "^9.3.4",
-    "typescript": "^4.5.5"
-  }
+    "@graphql-codegen/cli": "^2.16.5",
+    "@graphql-codegen/schema-ast": "^2.6.1",
+    "@graphql-codegen/typescript": "^2.8.8",
+    "@graphql-codegen/typescript-apollo-client-helpers": "^2.2.6",
+    "@graphql-codegen/typescript-resolvers": "^2.7.13",
+    "@types/node-cron": "^3.0.11",
+    "graphql": "^16.10.0",
+    "graphql-tag": "^2.12.6",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "graphql": "^16.10.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "19.0.10"
+    }
+  },
 }

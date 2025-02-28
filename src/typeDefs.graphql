@@ -9,3 +9,17 @@ type Query {
 type Mutation {
   say(input: String!): String!
 }
+
+type CronJob {
+  id: ID!
+  cronTime: String!
+}
+
+type Query {
+  cronJobs: [CronJob!]!
+}
+
+type Mutation {
+  createCronJob(id: ID!, cronTime: String!): Boolean!
+  stopCronJob(id: ID!): Boolean!
+}
