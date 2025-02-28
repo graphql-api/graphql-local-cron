@@ -12,8 +12,7 @@
     "codegen": "graphql-codegen",
     "example:build": "pnpm --filter @/example dev",
     "repomix": "repomix",
-    "prepare": "repomix"
-    "prepare": "npm run build",
+    "prepare": "repomix && npm run build",
     "prepublishOnly": "npm test && npm run lint",
     "docs": "typedoc --out docs src"
   },
@@ -66,12 +65,12 @@
   },
   "homepage": "https://github.com/graphql-api/graphql-browser-cron#readme",
   "dependencies": {
-    "cronstrue": "^2.47.0",
     "cron-parser": "^4.9.0",
-    "idb": "^7.1.1",
+    "cronstrue": "^2.47.0",
     "graphql": "^16.10.0",
     "graphql-scalars": "^1.24.1",
     "graphql-tag": "^2.12.6",
+    "idb": "^7.1.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -82,13 +81,13 @@
     "@graphql-tools/schema": "^10.0.3",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/uuid": "^9.0.8",
-    "eslint": "^8.57.0",
+    "eslint": "^9",
     "prettier": "^3.2.5",
     "rollup": "^4.12.1",
     "rollup-plugin-dts": "^6.1.0",
-    "rollup-plugin-terser": "^7.0.2",
     "typedoc": "^0.25.9",
     "typescript": "^5.7.3",
     "vitest": "^1.2.2"
