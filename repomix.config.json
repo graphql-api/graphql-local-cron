@@ -4,8 +4,6 @@
         "style": "markdown",
         "parsableStyle": true,
         "compress": false,
-        "headerText": "Custom header text",
-        // "instructionFilePath": "repomix-instruction.md",
         "fileSummary": true,
         "directoryStructure": true,
         "removeComments": false,
@@ -22,10 +20,20 @@
         "useGitignore": true,
         "useDefaultPatterns": true,
         "customPatterns": [
-            "exmaples/",
-            "node_modules",
-            "tmp/",
-            "*.log"
+            "examples/",
+            ".github/",
+            ".repomix/",
+            "node_modules/",
+            "*.log",
+            "pnpm-workspace.yaml",
+            "repomix.config.json",
+            "tsconfig.reference.json",
+            ".gitignore",
+            ".npmignore",
+            ".npmrc",
+            ".prettierrc",
+            ".stackblitzrc",
+            "codegen.yaml"
         ]
     },
     "security": {
