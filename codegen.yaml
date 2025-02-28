@@ -1,0 +1,23 @@
+schema:
+  - src/**/*.graphql
+generates:
+  schema.graphql:
+    plugins:
+      - schema-ast
+  types.ts:
+    plugins:
+      - typescript
+  # https://www.graphql-code-generator.com/plugins/typescript-apollo-client-helpers
+  helpers/apollo-client.ts:
+    plugins:
+      - typescript-apollo-client-helpers
+  helpers/introspection-result.json:
+    plugins:
+      - fragment-matcher
+    config:
+      module: es2015
+  helpers/introspection-result.cjs.json:
+    plugins:
+      - fragment-matcher
+    config:
+      module: commonjs

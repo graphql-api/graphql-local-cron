@@ -1,0 +1,63 @@
+{
+  "name": "@graphql-api/template",
+  "version": "0.0.0",
+  "description": "template",
+  "main": "index.js",
+  "exports": {
+    ".": {
+      "federation": []
+    },
+    "./resolvers": [
+      "./build/resolvers"
+    ],
+    "./schema": [
+      "./schema.graphql"
+    ]
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./build/types.d.ts"
+      ],
+      "federation:": [
+        "./federation/types.d.ts"
+      ]
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "codegen": "graphql-codegen",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphql-api/graphql-api-template.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/graphql-api"
+  },
+  "keywords": [
+    "graphql",
+    "apollo",
+    "gql",
+    "template",
+    "typescript"
+  ],
+  "author": "Jonathan Allenberg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/graphql-api/graphql-api-template/issues"
+  },
+  "homepage": "https://github.com/graphql-api/graphql-api-template#readme",
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.6.2",
+    "@graphql-codegen/schema-ast": "^2.4.1",
+    "@graphql-codegen/typescript": "^2.4.5",
+    "@graphql-codegen/typescript-apollo-client-helpers": "^2.1.12",
+    "@graphql-codegen/typescript-resolvers": "^2.5.2",
+    "apollo-server-micro": "^3.6.3",
+    "graphql": "^16.3.0",
+    "micro": "^9.3.4",
+    "typescript": "^4.5.5"
+  }
+}

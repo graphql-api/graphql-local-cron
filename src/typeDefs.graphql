@@ -1,0 +1,11 @@
+interface Node {
+  id: ID!
+}
+
+type Query {
+  hello: String
+}
+
+type Mutation {
+  say(input: String!): String!
+}
