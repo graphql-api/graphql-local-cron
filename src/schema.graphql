@@ -1,0 +1,131 @@
+scalar DateTime
+scalar Cron
+scalar JSON
+
+"""
+Task payload containing the task type and associated data
+"""
+type TaskPayload {
+  type: String!
+  data: JSON!
+}
+
+"""
+Status of a cron job
+"""
+enum JobStatus {
+  SCHEDULED
+  RUNNING
+  COMPLETED
+  FAILED
+  PAUSED
+  CANCELED
+}
+
+"""
+A scheduled cron job
+"""
+type CronJob {
+  id: ID!
+  name: String!
+  schedule: Cron!
+  task: TaskPayload!
+  lastRun: DateTime
+  nextRun: DateTime
+  status: JobStatus!
+  retryAttempts: Int!
+  maxRetries: Int!
+  tags: [String!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+Input for task payload when creating or updating a job
+"""
+input TaskPayloadInput {
+  type: String!
+  data: JSON!
+}
+
+"""
+Input for creating or updating a cron job
+"""
+input CronJobInput {
+  name: String!
+  schedule: Cron!
+  task: TaskPayloadInput!
+  maxRetries: Int = 3
+  tags: [String!]
+}
+
+type Query {
+  """
+  Get all cron jobs
+  """
+  jobs: [CronJob!]!
+  
+  """
+  Get a specific cron job by ID
+  """
+  job(id: ID!): CronJob
+  
+  """
+  Get cron jobs by tag
+  """
+  jobsByTag(tag: String!): [CronJob!]!
+  
+  """
+  Get cron jobs by status
+  """
+  jobsByStatus(status: JobStatus!): [CronJob!]!
+}
+
+type Mutation {
+  """
+  Create a new cron job
+  """
+  createJob(input: CronJobInput!): CronJob!
+  
+  """
+  Update an existing cron job
+  """
+  updateJob(id: ID!, input: CronJobInput!): CronJob!
+  
+  """
+  Delete a cron job
+  """
+  deleteJob(id: ID!): Boolean!
+  
+  """
+  Pause a running cron job
+  """
+  pauseJob(id: ID!): CronJob!
+  
+  """
+  Resume a paused cron job
+  """
+  resumeJob(id: ID!): CronJob!
+  
+  """
+  Trigger a job to run immediately
+  """
+  triggerJobNow(id: ID!): CronJob!
+}
+
+type Subscription {
+  """
+  Subscribe to job status changes
+  """
+  jobStatusChanged: CronJob!
+  
+  """
+  Subscribe to job completion events
+  """
+  jobCompleted: CronJob!
+  
+  """
+  Subscribe to job failure events
+  """
+  jobFailed: CronJob!
+}

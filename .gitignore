@@ -10,10 +10,7 @@ dist
 
 # testing
 /coverage
-
-# next.js
-/.next/
-/out/
+.nyc_output
 
 # production
 /build

@@ -28,7 +28,7 @@ The content is organized as follows:
 - Some files may have been excluded based on .gitignore rules and Repomix's configuration
 - Binary files are not included in this packed representation. Please refer to the Repository Structure section for a complete list of file paths, including binary files
 - Only files matching these patterns are included: **/*
-- Files matching these patterns are excluded: examples/, .github/, .repomix/, node_modules/, *.log
+- Files matching these patterns are excluded: examples/, .github/, .repomix/, node_modules/, *.log, pnpm-workspace.yaml, repomix.config.json, tsconfig.reference.json, .gitignore, .npmignore, .npmrc, .prettierrc, .stackblitzrc, codegen.yaml
 - Files matching patterns in .gitignore are excluded
 - Files matching default ignore patterns are excluded
 - Content has been formatted for parsing in markdown style
@@ -43,18 +43,9 @@ src/
   resolvers.ts
   typeDefs.graphql
   types.d.ts
-.gitignore
-.npmignore
-.npmrc
-.prettierrc
-.stackblitzrc
-codegen.yaml
 package.json
-pnpm-workspace.yaml
 README.md
-repomix.config.json
 tsconfig.json
-tsconfig.reference.json
 ```
 
 # Files
@@ -231,106 +222,6 @@ export interface Mutation<ID extends string = string> {
 }
 ```
 
-## File: .gitignore
-```
-.env
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-node_modules
-.next
-dist
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-package-lock.json
-yarn-debug.log*
-yarn-error.log*
-pnpm-lock.yaml
-*/.yarn-lock.yaml
-
-# local env files
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# vercel
-.vercel
-
-# typescript
-*.tsbuildinfo
-```
-
-## File: .npmignore
-```
-/.bolt
-/examples/
-.stackblitzrc
-tsconfig.reference.json
-```
-
-## File: .npmrc
-```
-@graphql-api:registry = https://npm.pkg.github.com
-```
-
-## File: .prettierrc
-```
-{ "tabWidth": 2, "useTabs": false }
-```
-
-## File: .stackblitzrc
-```
-{
-    "installDependencies": true,
-    "startCommand": "pnpm --filter @/example dev"
-}
-```
-
-## File: codegen.yaml
-```yaml
-schema:
-  - src/**/*.graphql
-generates:
-  schema.graphql:
-    plugins:
-      - schema-ast
-  types.ts:
-    plugins:
-      - typescript
-  # https://www.graphql-code-generator.com/plugins/typescript-apollo-client-helpers
-  helpers/apollo-client.ts:
-    plugins:
-      - typescript-apollo-client-helpers
-  helpers/introspection-result.json:
-    plugins:
-      - fragment-matcher
-    config:
-      module: es2015
-  helpers/introspection-result.cjs.json:
-    plugins:
-      - fragment-matcher
-    config:
-      module: commonjs
-```
-
 ## File: package.json
 ```json
 {
@@ -420,28 +311,6 @@ generates:
 }
 ```
 
-## File: pnpm-workspace.yaml
-```yaml
-packages:
-  - .
-  - examples/*
-
-catalog:
-  '@types/react': ^19
-  '@types/react-dom': ^19
-  eslint: ^9
-  graphql: ^16
-  next: ^15.2.0-canary.57
-  next-auth: ^5.0.0-beta.25
-  react: ^19
-  react-dom: ^19
-  prettier: ^3
-  tailwindcss: ^4
-  typescript: ^5.7.3
-  zustand: ^5.0.3
-  zod: ^3
-```
-
 ## File: README.md
 ```markdown
 # @graphql-api/template
@@ -466,43 +335,6 @@ netlify
 vercel
 
 next
-```
-
-## File: repomix.config.json
-```json
-{
-    "output": {
-        "filePath": ".repomix/repomix-output.md",
-        "style": "markdown",
-        "parsableStyle": true,
-        "compress": false,
-        "fileSummary": true,
-        "directoryStructure": true,
-        "removeComments": false,
-        "removeEmptyLines": false,
-        "topFilesLength": 5,
-        "showLineNumbers": false,
-        "copyToClipboard": false,
-        "includeEmptyDirectories": false
-    },
-    "include": [
-        "**/*"
-    ],
-    "ignore": {
-        "useGitignore": true,
-        "useDefaultPatterns": true,
-        "customPatterns": [
-            "examples/",
-            ".github/",
-            ".repomix/",
-            "node_modules/",
-            "*.log"
-        ]
-    },
-    "security": {
-        "enableSecurityCheck": true
-    }
-}
 ```
 
 ## File: tsconfig.json
@@ -610,17 +442,5 @@ next
     "node_modules",
     "examples"
   ]
-}
-```
-
-## File: tsconfig.reference.json
-```json
-{
-  "extends": [
-    "./tsconfig.json"
-  ],
-  "compilerOptions": {
-    "composite": true
-  }
 }
 ```

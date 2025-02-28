@@ -1,85 +1,102 @@
 {
-  "name": "@graphql-api/cron.local",
-  "version": "0.0.0",
-  "description": "cron",
+  "name": "@graphql-local/cron",
+  "version": "0.1.0",
+  "description": "Browser-based GraphQL cron job management library",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && rollup -c",
+    "dev": "tsc --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write 'src/**/*.ts'",
     "codegen": "graphql-codegen",
     "example:build": "pnpm --filter @/example dev",
     "repomix": "repomix",
     "prepare": "repomix"
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "docs": "typedoc --out docs src"
   },
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./src/index.ts",
-      "federation": []
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
     },
-    "./resolvers": [
-      "./build/resolvers"
-    ],
-    "./schema": [
-      "./schema.graphql"
-    ],
-    "./tsconfig": {
-      "import": "./tsconfig.json"
+    "./resolvers": {
+      "import": "./dist/resolvers.js",
+      "require": "./dist/resolvers.cjs.js"
+    },
+    "./schema": {
+      "import": "./dist/schema.graphql"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "require": "./dist/client.cjs.js"
     }
   },
-  "typesVersions": {
-    "*": {
-      ".": [
-        "./build/types.d.ts"
-      ],
-      "federation:": [
-        "./federation/types.d.ts"
-      ]
-    }
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/graphql-api/graphql-local-cron.git"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/graphql-api"
-  },
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
   "keywords": [
     "graphql",
-    "apollo",
-    "gql",
-    "template",
-    "typescript"
+    "cron",
+    "scheduler",
+    "browser",
+    "indexeddb",
+    "serviceworker",
+    "background-sync"
   ],
   "author": {
-    "url": "https://codeberg.org/jfa",
-    "name": "jfa"
+    "name": "GraphQL API Team"
   },
-  "license": "ISC",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/graphql-api/graphql-browser-cron.git"
+  },
   "bugs": {
-    "url": "https://github.com/graphql-api/graphql-local-cron/issues"
+    "url": "https://github.com/graphql-api/graphql-browser-cron/issues"
   },
-  "homepage": "https://github.com/graphql-api/graphql-local-cron#readme",
+  "homepage": "https://github.com/graphql-api/graphql-browser-cron#readme",
   "dependencies": {
-    "events": "^3.3.0"
+    "cronstrue": "^2.47.0",
+    "cron-parser": "^4.9.0",
+    "idb": "^7.1.1",
+    "graphql": "^16.10.0",
+    "graphql-scalars": "^1.24.1",
+    "graphql-tag": "^2.12.6",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.16.5",
-    "@graphql-codegen/schema-ast": "^2.6.1",
-    "@graphql-codegen/typescript": "^2.8.8",
-    "@graphql-codegen/typescript-apollo-client-helpers": "^2.2.6",
-    "@graphql-codegen/typescript-resolvers": "^2.7.13",
-    "@types/node-cron": "^3.0.11",
-    "graphql": "^16.10.0",
-    "graphql-tag": "^2.12.6",
-    "repomix": "^0.2.30",
-    "typescript": "^5.7.3"
+    "@graphql-codegen/cli": "^5.0.2",
+    "@graphql-codegen/schema-ast": "^4.0.2",
+    "@graphql-codegen/typescript": "^4.0.4",
+    "@graphql-codegen/typescript-resolvers": "^4.0.4",
+    "@graphql-tools/schema": "^10.0.3",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/uuid": "^9.0.8",
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5",
+    "rollup": "^4.12.1",
+    "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "typedoc": "^0.25.9",
+    "typescript": "^5.7.3",
+    "vitest": "^1.2.2"
   },
-  "peerDependencies": {
-    "graphql": "^16.10.0"
-  },
-  "pnpm": {
-    "overrides": {
-      "@types/react": "19.0.10"
-    }
-  }
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Firefox versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions"
+  ]
 }
